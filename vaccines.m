@@ -13,7 +13,8 @@ v=1/100; %vaccination rate
 T=300; %with units days
 dt=1/8; %dt
 clockmax=ceil(T/dt);
-event = zeros(clockmax, 5); % array that keeps track of t, S, I, R at every single loop
+overall = zeros(clockmax, 4); % array that keeps track of t, S, I, R at every single loop
+split = zeros(clockmax, 5); % array that keeps track of t, S, I, IR, SR at every single loop
 
 for i = 1:clockmax
     t=i*dt;
@@ -30,14 +31,21 @@ for i = 1:clockmax
     
     R=IR+SR;
     
-    
-    event(i,:)=[t S I IR SR];
-    
+    overall(i,:)=[t S I R];
+    split(i,:)=[t S I IR SR];
 end
-figure
+% figure
+
+for j = 2 : 4
+    subplot(2,1,1);
+    plot (overall(:,1),overall(:,j),'-o');
+    hold on
+end
+legend('S','I','R')
 
 for j = 2 : 5
-    plot (event(:,1),event(:,j),'-o');
+    subplot(2,1,2);
+    plot (split(:,1),split(:,j),'-o');
     hold on
 end
 legend('S','I','IR','SR')

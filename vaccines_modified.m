@@ -18,7 +18,11 @@ split = zeros(clockmax, 5); % array that keeps track of t, S, I, IR, SR at every
 
 for i = 1:clockmax
     t=i*dt;
-    
+    if t < 10 % this is the day that the vaccine will be released
+        v=0;
+    else
+        v=1/100;
+    end
     SS=S;
     S=S+dt*(-a*S*I/N-S*v); %number of susceptible people going down because of infection and vaccination
     
@@ -31,9 +35,9 @@ for i = 1:clockmax
     
     R=IR+SR;
     
-    overall(i,:)=[t S I R];
+    overall(i,:)=[t S I R]; 
     split(i,:)=[t S I IR SR];
-    
+
 end
 % figure
 

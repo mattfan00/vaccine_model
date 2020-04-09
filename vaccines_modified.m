@@ -42,15 +42,27 @@ end
 % figure
 
 for j = 2 : 4
-    subplot(2,1,1);
+    subplot(3,1,1);
     plot (overall(:,1),overall(:,j),'-o');
+    axis ([0 100 0 10000])
+    title('Line plot of SIR model with delayed vaccines')
     hold on
 end
 legend('S','I','R')
 
 for j = 2 : 5
-    subplot(2,1,2);
+    subplot(3,1,2);
     plot (split(:,1),split(:,j),'-o');
+    axis ([0 100 0 10000])
+    title('Line plot showing vaccined-recovered and infected-recovered')
+    hold on
+end
+legend('S','I','IR','SR')
+for j = 2 : 5
+    subplot(3,1,3);
+    plot (split(:,1),split(:,j),'-o');
+    axis ([0 300 0 10000])
+    title('Line plot showing the full 300 days')
     hold on
 end
 legend('S','I','IR','SR')

@@ -28,20 +28,23 @@ for i = 1:clockmax
     II=I(1);
     RR=R(1);
     
-    % updating the population of city one of people leaving and people
-    % coming in 
-    S(1)=S(1)+(-e1*S(1)+e2*S(2))*dt;
-    I(1)=I(1)+(-e1*I(1)+e2*I(2))*dt;
-    R(1)=R(1)+(-e1*R(1)+e2*R(2))*dt;
+    % showing a travel ban after 10 days
+    if t < 10
+        % updating the population of city one of people leaving and people
+        % coming in 
+        S(1)=S(1)+(-e1*S(1)+e2*S(2))*dt;
+        I(1)=I(1)+(-e1*I(1)+e2*I(2))*dt;
+        R(1)=R(1)+(-e1*R(1)+e2*R(2))*dt;
 
-    % updating the population of city two of people leaving and people
-    % coming in 
-    S(2)=S(2)+(-e2*S(2)+e1*SS)*dt;
-    I(2)=I(2)+(-e2*I(2)+e1*II)*dt;
-    R(2)=R(2)+(-e2*R(2)+e1*RR)*dt;
-    
+        % updating the population of city two of people leaving and people
+        % coming in 
+        S(2)=S(2)+(-e2*S(2)+e1*SS)*dt;
+        I(2)=I(2)+(-e2*I(2)+e1*II)*dt;
+        R(2)=R(2)+(-e2*R(2)+e1*RR)*dt;
+    end
     city1(i,:)=[t S(1) I(1) R(1)];
     city2(i,:)=[t S(2) I(2) R(2)];
+    
     
 end
 

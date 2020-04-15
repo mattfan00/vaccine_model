@@ -4,8 +4,8 @@ totalInfections=[];
 N=[235606 1000000]; % populations of USA and China respectively
 
 %SIR model
-S=[235606 998000]; 
-I=[0 2000];
+S=[235606 999999.9706]; 
+I=[0 41];
 R=[0 0];
 
 a=1/2;
@@ -48,7 +48,7 @@ for i = 1:clockmax
     totalInfections(i,:)=[t I(1)+I(2)];
     
 end
-
+figure('Name','No travel restrictions','NumberTitle','off') %set the figure window title
 for j = 2:4
     plot1 = subplot(3,1,1);
     plot (city1(:,1),city1(:,j),'-o');
@@ -65,7 +65,7 @@ for j = 2:4
 end
 legend('S', 'I', 'R');
 
-plot3 = subplot(3,1,3);
+subplot(3,1,3);
 plot (totalInfections(:,1), totalInfections(:,2), '-o');
 title ('Total Infections'); 
 hold on

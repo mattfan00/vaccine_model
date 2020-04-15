@@ -1,10 +1,11 @@
 city1=[]; % the United States
 city2=[]; % China
-N=[235606 1000000] % populations of USA and China respectively
+totalInfections=[];
+N=[235606 1000000]; % populations of USA and China respectively
 
 %SIR model
-S=[235606 998000]; 
-I=[0 2000];
+S=[235606 999999.9706]; 
+I=[0 .0294];
 R=[0 0];
 
 a=1/2;
@@ -42,22 +43,33 @@ for i = 1:clockmax
         I(2)=I(2)+(-e2*I(2)+e1*II)*dt;
         R(2)=R(2)+(-e2*R(2)+e1*RR)*dt;
     end
+    
+    population = S(1)+S(2)+I(1)+I(2)+R(1)+R(2);
+    
     city1(i,:)=[t S(1) I(1) R(1)];
     city2(i,:)=[t S(2) I(2) R(2)];
-    
+    totalInfections(i,:)=[t I(1)+I(2)];
     
 end
-
+%set the figure window title
+figure('Name','Travel restrictions implemented','NumberTitle','off') 
 for j = 2:4
-    subplot(2,1,1)
+    subplot(3,1,1)
     plot (city1(:,1),city1(:,j),'-o');
+    title ('USA with Travel Ban');
     hold on
 end
 legend('S', 'I', 'R');
 
 for j = 2:4
-    subplot(2,1,2)
+    subplot(3,1,2)
     plot (city2(:,1),city2(:,j),'-o');
+    title ('China with Travel Ban');
     hold on
 end
 legend('S', 'I', 'R');
+
+subplot(3,1,3);
+plot (totalInfections(:,1), totalInfections(:,2), '-o');
+title ('Total Infections with Travel Ban'); 
+hold on

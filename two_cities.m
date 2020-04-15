@@ -16,8 +16,8 @@ dt=0.1;
 clockmax=ceil(T/dt);
 
 % exchange rates - percentage of population every day
-e1=0.00000105845; % people traveling out of USA and going into China
-e2=0.00000308686; % people traveling out of China and going into USA
+e1=0.000105845; % people traveling out of USA and going into China
+e2=0.000308686; % people traveling out of China and going into USA
 for i = 1:clockmax
     t=i*dt;
     

@@ -1,23 +1,22 @@
 city1=[]; % the United States
 city2=[]; % China
 totalInfections=[];
-N=[8004878 33975610]; % populations of USA and China respectively
+N=[235606 1000000]; % populations of USA and China respectively
 
 %SIR model
-S=[8004878 33975609]; 
-I=[0 1];
+S=[235606 998000]; 
+I=[0 2000];
 R=[0 0];
 
-%reproduction number a/b = 2.5
 a=1/2;
 b=1/10;
 T=100; % with units days
-dt=0.1;
+dt=1/8;
 clockmax=ceil(T/dt);
 
 % exchange rates - percentage of population every day
-e1=0.000105845; % people traveling out of USA and going into China
-e2=0.000308686; % people traveling out of China and going into USA
+e1=0.0001; % people traveling out of USA and going into China
+e2=.0003; % people traveling out of China and going into USA
 for i = 1:clockmax
     t=i*dt;
     
@@ -49,8 +48,7 @@ for i = 1:clockmax
     totalInfections(i,:)=[t I(1)+I(2)];
     
 end
-%set the figure window title
-figure('Name','No travel restrictions','NumberTitle','off') 
+
 for j = 2:4
     plot1 = subplot(3,1,1);
     plot (city1(:,1),city1(:,j),'-o');
@@ -67,7 +65,7 @@ for j = 2:4
 end
 legend('S', 'I', 'R');
 
-subplot(3,1,3);
+plot3 = subplot(3,1,3);
 plot (totalInfections(:,1), totalInfections(:,2), '-o');
 title ('Total Infections'); 
 hold on
